@@ -7,7 +7,21 @@ const Stack = createNativeStackNavigator(); // <-- CAMBIO AQUÍ
 
 export default function HistorialStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      // ESTILOS GLOBALES PARA TODAS LAS PANTALLAS DE ESTE STACK
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0d0f12', // Mismo fondo oscuro del menú inferior
+        },
+        headerTintColor: '#ffffff', // Letras y flechas de retroceso en color blanco
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          letterSpacing: 1, // Le da un toque más moderno a la fuente
+        },
+        // headerShadowVisible quita la línea blanca separadora que pone Android por defecto
+        headerShadowVisible: false,
+      }}
+    >
       <Stack.Screen
         name="historial-screen"
         component={HistorialTest}

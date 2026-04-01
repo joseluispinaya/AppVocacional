@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#050505"
     },
     "ios": {
       "supportsTablet": true
@@ -18,12 +18,30 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#050505"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La aplicación necesita acceso a tu galería para que puedas subir tu foto de perfil.",
+          "cameraPermission": "La aplicación necesita acceso a tu cámara para tomar tu foto de perfil.",
+          "colors": {
+            "cropToolbarColor": "#050505"
+          },
+          "dark": {
+            "colors": {
+              "cropToolbarColor": "#050505"
+            }
+          }
+        }
+      ],
+      "expo-asset"
+    ]
   }
 }

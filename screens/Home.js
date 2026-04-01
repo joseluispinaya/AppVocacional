@@ -1,28 +1,62 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Avatar, Button } from '@rneui/themed';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { Asset } from 'expo-asset';
+// IMPORTANTE: Importamos el contexto para acceder a la función logout
+import { AuthContext } from '../context/AuthContext';
+
+
+// URL base para concatenar las imágenes
+const BASE_URL = 'http://joseluis1989-008-site2.ltempurl.com';
+
+// 2. EXTRAEMOS LA URI LOCAL DE LA IMAGEN POR DEFECTO
+const defaultAvatarUri = Asset.fromModule(require('../assets/no-image.png')).uri;
+
 
 export default function Home() {
+  const navigation = useNavigation();
+  // Consumimos la función logout del estado global
+  // Consumimos el usuario y la función logout
+  const { user } = useContext(AuthContext);
+
+  // 2. LÓGICA BLINDADA
+  // Verificamos que 'Photo' exista Y que, al quitarle los espacios, no esté vacío.
+  const tieneFoto = user?.Photo && user.Photo.trim() !== "";
+
+  // 1. LÓGICA DE LA FOTO DE PERFIL
+  // Si el usuario tiene foto en BD, concatenamos. Si no, usamos la imagen local por defecto.
+  const avatarSource = tieneFoto
+    ? { uri: `${BASE_URL}${user.Photo.trim()}` }
+    : { uri: defaultAvatarUri }; // ¡Magia! Ahora ambos lados son un objeto con 'uri'
+
+  //console.log(avatarSource);
+
+  // Si por alguna razón el usuario aún no carga, evitamos errores
+  if (!user) return null;
+
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        
+    // Reemplazamos SafeAreaView por un View normal
+    <View style={styles.mainContainer}>
+      {/* showsVerticalScrollIndicator={false} oculta la barra fea de scroll a la derecha */}
+      <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+
         {/* ==========================================
-            1. HEADER: Saludo y Avatar del Usuario
+            1. HEADER: Saludo y Avatar Dinámico
         ========================================== */}
         <View style={styles.header}>
           <View style={styles.headerTextContainer}>
-            <Text style={styles.greeting}>Hola, Estudiante 👋</Text>
-            <Text style={styles.subtitle}>¿Listo para descubrir tu futuro?</Text>
+            {/* Mostramos solo el primer nombre, o puedes usar user.FullName */}
+            <Text style={styles.greeting}>Hola, {user.Nombres} 👋</Text>
+            {/* Mostramos el colegio al que pertenece como detalle extra */}
+            <Text style={styles.subtitle}>{user.NombreUndEd}</Text>
           </View>
-          
+
           <Avatar
             size={56}
             rounded
-            // Aquí luego puedes poner la foto real del usuario o iniciales
-            source={{ uri: 'https://randomuser.me/api/portraits/lego/1.jpg' }} 
+            source={avatarSource}
             containerStyle={styles.avatarBorder}
           />
         </View>
@@ -32,7 +66,6 @@ export default function Home() {
         ========================================== */}
         <View style={styles.heroCard}>
           <View style={styles.imageContainer}>
-            {/* Asegúrate de que la ruta coincida con la ubicación de tu carpeta assets */}
             <Image
               source={require('../assets/logodefault.png')}
               style={styles.heroImage}
@@ -46,24 +79,24 @@ export default function Home() {
           </Text>
 
           <Button
-            title=" COMENZAR TEST VOCACIONAL"
+            title=" COMENZAR TEST"
             icon={<Ionicons name="rocket-outline" size={22} color="#ffffff" />}
             buttonStyle={styles.primaryButton}
             containerStyle={styles.buttonContainer}
             titleStyle={{ fontWeight: 'bold', fontSize: 16, letterSpacing: 1 }}
-            onPress={() => console.log('Navegar al Test')}
+            // LA SOLUCIÓN: Navegamos directamente al nombre del Tab
+            onPress={() => navigation.navigate('test-model')}
           />
         </View>
 
         {/* ==========================================
-            3. ACCIONES SECUNDARIAS: Historial y Perfil
+            3. ACCIONES SECUNDARIAS
         ========================================== */}
         <View style={styles.actionsGrid}>
-          {/* Tarjeta de Historial */}
-          <TouchableOpacity 
-            style={styles.actionCard} 
+          <TouchableOpacity
+            style={styles.actionCard}
             activeOpacity={0.8}
-            onPress={() => console.log('Navegar al Historial')}
+            onPress={() => navigation.navigate('historia')}
           >
             <View style={[styles.iconBox, { backgroundColor: 'rgba(0, 229, 255, 0.1)' }]}>
               <Ionicons name="time" size={32} color="#00e5ff" />
@@ -71,28 +104,27 @@ export default function Home() {
             <Text style={styles.actionText}>Mi Historial</Text>
           </TouchableOpacity>
 
-          {/* Tarjeta de Catálogo de Carreras */}
-          <TouchableOpacity 
-            style={styles.actionCard} 
+          <TouchableOpacity
+            style={styles.actionCard}
             activeOpacity={0.8}
-            onPress={() => console.log('Navegar a Carreras')}
+            onPress={() => navigation.navigate('account')}
           >
             <View style={[styles.iconBox, { backgroundColor: 'rgba(232, 102, 255, 0.1)' }]}>
-              <Ionicons name="school" size={32} color="#e866ff" />
+              <Ionicons name="person" size={32} color="#e866ff" />
             </View>
-            <Text style={styles.actionText}>Carreras</Text>
+            <Text style={styles.actionText}>Perfil</Text>
           </TouchableOpacity>
         </View>
 
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
+  mainContainer: {
     flex: 1,
-    backgroundColor: '#050505', // Fondo oscuro profundo
+    backgroundColor: '#050505',
   },
   container: {
     flex: 1,
@@ -119,12 +151,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: '#8a98ac',
+    color: '#00e5ff', // Lo puse en cian para que resalte el nombre del colegio
     marginTop: 4,
   },
   avatarBorder: {
     borderWidth: 2,
-    borderColor: '#00e5ff', // Borde cian neón para el avatar
+    borderColor: '#00e5ff',
     padding: 2,
   },
   /* --- Hero Card --- */
@@ -135,7 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
-    // Sombra neón suave
     shadowColor: '#00e5ff',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.15,
@@ -146,12 +177,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 150,
     height: 150,
-    backgroundColor: '#000000', // Funde los bordes del logo
+    backgroundColor: '#000000',
     borderRadius: 75,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
-    // Efecto de resplandor detrás del logo
     shadowColor: '#e866ff',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.4,
@@ -171,7 +201,7 @@ const styles = StyleSheet.create({
   },
   heroText: {
     fontSize: 14,
-    color: '#a17dc3', // Un tono violeta suave para el texto
+    color: '#a17dc3',
     textAlign: 'center',
     marginBottom: 25,
     lineHeight: 22,
@@ -182,7 +212,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   primaryButton: {
-    backgroundColor: '#442484', // Violeta intenso de tu paleta
+    backgroundColor: '#442484',
     paddingVertical: 15,
   },
   /* --- Actions Grid --- */
