@@ -62,7 +62,7 @@ export default function Navigation() {
                 iconName = "person";
                 break;
             default:
-                iconName = "help-circle"; // Icono por defecto por seguridad
+                iconName = "help-circle";
                 break;
         }
 

@@ -9,7 +9,7 @@ import { AuthContext } from '../context/AuthContext';
 
 
 // URL base para concatenar las imágenes
-const BASE_URL = 'http://joseluis1989-008-site2.ltempurl.com';
+const BASE_URL = 'https://fabkevin-003-site1.anytempurl.com';
 
 // 2. EXTRAEMOS LA URI LOCAL DE LA IMAGEN POR DEFECTO
 const defaultAvatarUri = Asset.fromModule(require('../assets/no-image.png')).uri;

@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Modal from '../../components/Modal';
 import CambiarPasswordForm from '../../components/account/CambiarPasswordForm';
 
-const BASE_URL = 'http://joseluis1989-008-site2.ltempurl.com';
+const BASE_URL = 'https://fabkevin-003-site1.anytempurl.com';
 const defaultAvatarUri = Asset.fromModule(require('../../assets/no-image.png')).uri;
 
 export default function Account() {

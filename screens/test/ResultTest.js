@@ -99,7 +99,7 @@ export default function ResultTest() {
                 </head>
                 <body>
                     <div class="header-container">
-                        <img src="https://joseluis1989-008-site1.ltempurl.com/logosPart/logreportpdf.png" class="logo" />
+                        <img src="https://fabkevin-003-site1.anytempurl.com/images/logoVocaIA.jpg" class="logo" />
                         <div class="header-text">
                             <h1>Reporte Vocacional</h1>
                             <p>Análisis de aptitudes generado automáticamente</p>

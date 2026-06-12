@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import Loading from '../../components/Loading';
 import { AuthContext } from '../../context/AuthContext';
 
-const API_URL = 'http://joseluis1989-008-site2.ltempurl.com/api';
+const API_URL = 'https://fabkevin-003-site1.anytempurl.com/api';
 
 export default function HistorialTest() {
   const { user } = useContext(AuthContext);
