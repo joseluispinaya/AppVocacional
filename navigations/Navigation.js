@@ -14,6 +14,7 @@ import { ActivityIndicator, View } from 'react-native';
 
 import HomeStack from './HomeStack';
 import TestStack from './TestStack'
+import PruebaStack from './PruebaStack'
 import HistorialStack from './HistorialStack'
 import AccountStack from './AccountStack'
 
@@ -54,6 +55,9 @@ export default function Navigation() {
                 break;
             case "test-model":
                 iconName = "school";
+                break;
+            case "prueba-model":
+                iconName = "book";
                 break;
             case "historia":
                 iconName = "newspaper";
@@ -104,6 +108,7 @@ export default function Navigation() {
                 >
                     <Tab.Screen name="home" component={HomeStack} options={{ title: "Inicio" }} />
                     <Tab.Screen name="test-model" component={TestStack} options={{ title: "Test" }} />
+                    <Tab.Screen name="prueba-model" component={PruebaStack} options={{ title: "Test2" }} />
                     <Tab.Screen name="historia" component={HistorialStack} options={{ title: "Historia" }} />
                     <Tab.Screen name="account" component={AccountStack} options={{ title: "Cuenta" }} />
                 </Tab.Navigator>

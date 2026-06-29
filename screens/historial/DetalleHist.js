@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Loading from '../../components/Loading';
 
-const API_URL = 'https://fabkevin-003-site1.anytempurl.com/api';
+import { API_URL } from '../../utils/apiConfig';
 
 export default function DetalleHist() {
     const route = useRoute();

@@ -8,7 +8,7 @@ import Loading from '../../components/Loading';
 // Importamos tu contexto de autenticación
 import { AuthContext } from '../../context/AuthContext';
 
-const API_URL = 'https://fabkevin-003-site1.anytempurl.com/api';
+import { API_URL } from '../../utils/apiConfig';
 
 export default function TestVocacional() {
     // Obtenemos el usuario directamente del contexto global ¡Mucho más limpio!

@@ -15,7 +15,7 @@ const defaultAvatar = Asset.fromModule(
     require('../../assets/no-image.png')
 ).uri;
 
-const API_URL = 'https://fabkevin-003-site1.anytempurl.com/api';
+import { API_URL } from '../../utils/apiConfig';
 
 export default function Register() {
     const navigation = useNavigation();

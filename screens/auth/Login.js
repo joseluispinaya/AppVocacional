@@ -9,7 +9,9 @@ import Loading from '../../components/Loading';
 import { showErrorToast, showSuccessToast } from '../../utils/toastAlert';
 import { AuthContext } from '../../context/AuthContext';
 
-const API_URL = 'https://fabkevin-003-site1.anytempurl.com/api';
+// 1. IMPORTAMOS LA URL DESDE NUESTRO ARCHIVO CENTRAL
+import { API_URL } from '../../utils/apiConfig';
+
 
 export default function Login() {
     const navigation = useNavigation();

@@ -7,9 +7,9 @@ import { Asset } from 'expo-asset';
 // IMPORTANTE: Importamos el contexto para acceder a la función logout
 import { AuthContext } from '../context/AuthContext';
 
-
 // URL base para concatenar las imágenes
-const BASE_URL = 'https://fabkevin-003-site1.anytempurl.com';
+import { BASE_URL } from '../utils/apiConfig';
+
 
 // 2. EXTRAEMOS LA URI LOCAL DE LA IMAGEN POR DEFECTO
 const defaultAvatarUri = Asset.fromModule(require('../assets/no-image.png')).uri;
@@ -67,7 +67,8 @@ export default function Home() {
         <View style={styles.heroCard}>
           <View style={styles.imageContainer}>
             <Image
-              source={require('../assets/logodefault.png')}
+              source={{ uri: 'https://fabkevin-003-site1.anytempurl.com/images/logovila.jpg' }} 
+              // source={require('../assets/logodefault.png')}
               style={styles.heroImage}
               resizeMode="contain"
             />
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
   heroImage: {
     width: 130,
     height: 130,
+    borderRadius: 65,
   },
   heroTitle: {
     fontSize: 22,

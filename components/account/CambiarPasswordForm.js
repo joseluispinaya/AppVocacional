@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { showErrorToast, showLogoutToast } from '../../utils/toastAlert';
 import { AuthContext } from '../../context/AuthContext';
 
-const API_URL = 'http://joseluis1989-008-site2.ltempurl.com/api';
+import { API_URL } from '../../utils/apiConfig';
 
 export default function CambiarPasswordForm({ setShowModal }) {
     const { user, logout } = useContext(AuthContext);
